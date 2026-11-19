@@ -461,7 +461,7 @@ Kedua teknologi harus menggunakan token visual yang sama.
 | Teks utama | `text-primary` | `text-primary` |
 | Status success/warning/danger | Token global | Token global |
 
-Rafif bertanggung jawab menyesuaikan tema Filament sesuai versi yang terpasang. Adhitya dan Gading menggunakan token yang sama pada Blade. Project Manager menyetujui implementasi token global dan integrasi asset.
+Rafif bertanggung jawab menyesuaikan tema Filament sesuai versi yang terpasang. RADHITYA dan Gading menggunakan token yang sama pada Blade. Project Manager menyetujui implementasi token global dan integrasi asset.
 
 ## 11. Implementasi Design Tokens
 
@@ -578,7 +578,7 @@ Contoh:
 
 | Anggota | Area desain | Kewajiban |
 |---|---|---|
-| Adhitya | Kasir dan laporan karyawan | Mengikuti seluruh token, komponen, dan layout pada PRD |
+| RADHITYA | Kasir dan laporan karyawan | Mengikuti seluruh token, komponen, dan layout pada PRD |
 | Rafif | Dashboard owner Filament | Menyesuaikan tema Filament agar identik dengan design system |
 | Gading | Manajemen stok | Mengikuti token dan komponen yang sama dengan kasir |
 | Project Manager | Design system global | Menetapkan token, menyetujui perubahan, dan melakukan review visual |

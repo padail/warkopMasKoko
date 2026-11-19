@@ -36,11 +36,11 @@ warkop-management/
 │   │
 │   ├── Http/
 │   │   ├── Controllers/
-│   │   │   ├── Kasir/                     # ADHITYA
+│   │   │   ├── Kasir/                     # RADHITYA
 │   │   │   │   ├── KasirController.php
 │   │   │   │   └── TransaksiController.php
 │   │   │   │
-│   │   │   ├── Karyawan/                 # ADHITYA
+│   │   │   ├── Karyawan/                 # RADHITYA
 │   │   │   │   └── LaporanHarianController.php
 │   │   │   │
 │   │   │   └── Stok/                     # GADING
@@ -48,7 +48,7 @@ warkop-management/
 │   │   │
 │   │   ├── Middleware/                   # file bersama, koordinasi PM
 │   │   └── Requests/
-│   │       ├── Kasir/                    # ADHITYA
+│   │       ├── Kasir/                    # RADHITYA
 │   │       └── Stok/                     # GADING
 │   │
 │   ├── Models/                           # model inti: PM; model baru sesuai modul
@@ -56,10 +56,10 @@ warkop-management/
 │   │   ├── MenuBarang.php                # model inti, jangan diubah tanpa koordinasi
 │   │   ├── Transaksi.php                 # model inti, jangan diubah tanpa koordinasi
 │   │   ├── DetailTransaksi.php           # model inti, jangan diubah tanpa koordinasi
-│   │   └── SerahTerimaKas.php            # ADHITYA, jika tabel dibuat
+│   │   └── SerahTerimaKas.php            # RADHITYA, jika tabel dibuat
 │   │
 │   ├── Services/
-│   │   ├── Kasir/                        # ADHITYA
+│   │   ├── Kasir/                        # RADHITYA
 │   │   │   ├── TransaksiService.php
 │   │   │   └── SerahTerimaKasService.php
 │   │   │
@@ -91,13 +91,13 @@ warkop-management/
 │   ├── css/
 │   │   ├── app.css                       # PM: entry point CSS bersama
 │   │   └── modules/
-│   │       ├── kasir.css                 # ADHITYA, jika diperlukan
+│   │       ├── kasir.css                 # RADHITYA, jika diperlukan
 │   │       └── stok.css                  # GADING, jika diperlukan
 │   │
 │   ├── js/
 │   │   ├── app.js                        # PM: entry point JS bersama
 │   │   └── modules/
-│   │       ├── kasir.js                  # ADHITYA
+│   │       ├── kasir.js                  # RADHITYA
 │   │       └── stok.js                   # GADING
 │   │
 │   └── views/
@@ -106,17 +106,17 @@ warkop-management/
 │       │
 │       ├── components/                   # komponen umum, koordinasi PM
 │       │
-│       ├── kasir/                        # ADHITYA
+│       ├── kasir/                        # RADHITYA
 │       │   ├── index.blade.php
 │       │   └── partials/
 │       │       ├── daftar-barang.blade.php
 │       │       ├── keranjang.blade.php
 │       │       └── pembayaran.blade.php
 │       │
-│       ├── transaksi/                    # ADHITYA
+│       ├── transaksi/                    # RADHITYA
 │       │   └── detail.blade.php
 │       │
-│       ├── karyawan/                     # ADHITYA
+│       ├── karyawan/                     # RADHITYA
 │       │   └── laporan-harian/
 │       │       ├── index.blade.php
 │       │       └── detail-serah-terima.blade.php
@@ -130,14 +130,14 @@ warkop-management/
 │
 ├── routes/
 │   ├── web.php                           # PM: memuat route modul
-│   ├── kasir.php                         # ADHITYA
-│   ├── karyawan.php                      # ADHITYA
+│   ├── kasir.php                         # RADHITYA
+│   ├── karyawan.php                      # RADHITYA
 │   └── stok.php                          # GADING
 │
 ├── tests/
 │   ├── Feature/
-│   │   ├── Kasir/                        # ADHITYA
-│   │   ├── Karyawan/                     # ADHITYA
+│   │   ├── Kasir/                        # RADHITYA
+│   │   ├── Karyawan/                     # RADHITYA
 │   │   ├── Stok/                          # GADING
 │   │   └── Filament/                     # RAFIF
 │   └── Unit/
@@ -165,7 +165,7 @@ bukan perintah untuk memaksakan struktur versi tertentu.
 
 ## 2. Batas Area Kerja Setiap Anggota
 
-### A. Adhitya Arif Atahillah
+### A. RADHITYA Arif Atahillah
 
 **Modul:** Kasir, transaksi, laporan harian karyawan, dan pengiriman
 serah terima kas.
@@ -228,10 +228,10 @@ terima. 10. Menyimpan identitas admin dan waktu verifikasi. 11. Membuat
 pengujian akses panel dan verifikasi.
 
 Rafif menggunakan model `SerahTerimaKas` dan service serah terima yang
-dibuat Adhitya. Jangan membuat model atau tabel serah terima kedua.
+dibuat RADHITYA. Jangan membuat model atau tabel serah terima kedua.
 
 **Jangan mengubah tanpa koordinasi:** - `app/Models/User.php` - model
-inti transaksi dan barang - model `SerahTerimaKas.php` milik Adhitya -
+inti transaksi dan barang - model `SerahTerimaKas.php` milik RADHITYA -
 migration baseline - `bootstrap/app.php` - `composer.json` -
 `routes/web.php`.
 
@@ -264,13 +264,13 @@ harga, nama, kategori, atau status barang. 8. Membuat indikator stok
 normal, menipis, dan habis. 9. Memastikan stok tidak pernah bernilai
 negatif. 10. Menguji pembaruan stok bersamaan dengan proses transaksi.
 
-Gading harus berkoordinasi dengan Adhitya mengenai proses pengurangan
+Gading harus berkoordinasi dengan RADHITYA mengenai proses pengurangan
 stok ketika transaksi selesai. Hanya boleh ada satu aturan pengurangan
 stok yang disepakati. Jangan membuat pengurangan stok kedua di
 controller stok.
 
 **Jangan mengubah tanpa koordinasi:** - `app/Models/User.php` - model
-inti barang - service transaksi milik Adhitya - migration baseline -
+inti barang - service transaksi milik RADHITYA - migration baseline -
 `routes/web.php` - `resources/views/layouts/app.blade.php` -
 `resources/js/app.js` - `vite.config.js`.
 
@@ -327,12 +327,12 @@ lain.
 Gunakan file route terpisah agar anggota tidak perlu mengedit
 `routes/web.php` setiap kali menambahkan endpoint.
 
-### `routes/kasir.php` - Adhitya
+### `routes/kasir.php` - RADHITYA
 
 Contoh tanggung jawab route: - `GET /kasir` - `POST /kasir/transaksi` -
 `GET /transaksi/{transaksi}`
 
-### `routes/karyawan.php` - Adhitya
+### `routes/karyawan.php` - RADHITYA
 
 Contoh tanggung jawab route: - `GET /karyawan/laporan-harian` -
 `GET /karyawan/laporan-harian/{tanggal}` - `POST /karyawan/serah-terima`
@@ -402,7 +402,7 @@ framework. Pemisahan tanggung jawab dilakukan melalui nama file, Issue,
 dan Pull Request.
 
 Aturan: 1. Migration baseline yang sudah di-push tidak boleh diedit. 2.
-Jika Adhitya membutuhkan tabel serah terima, buat migration baru. 3.
+Jika RADHITYA membutuhkan tabel serah terima, buat migration baru. 3.
 Jika Gading membutuhkan tabel riwayat stok, ajukan rancangan terlebih
 dahulu. 4. Project Manager memeriksa foreign key, tipe data, index,
 unique constraint, dan dampak migration. 5. Setiap migration harus diuji
@@ -419,9 +419,9 @@ dikoordinasikan.
 
 Agar file frontend tidak bertabrakan:
 
--   Adhitya menulis interaksi kasir di `resources/js/modules/kasir.js`.
+-   RADHITYA menulis interaksi kasir di `resources/js/modules/kasir.js`.
 -   Gading menulis interaksi stok di `resources/js/modules/stok.js`.
--   Adhitya menulis CSS khusus kasir di
+-   RADHITYA menulis CSS khusus kasir di
     `resources/css/modules/kasir.css` jika benar-benar diperlukan.
 -   Gading menulis CSS khusus stok di `resources/css/modules/stok.css`
     jika benar-benar diperlukan.
@@ -474,8 +474,8 @@ Contoh:
 ``` text
 main
 └── develop
-    ├── feature/adhitya-kasir
-    ├── feature/adhitya-laporan-karyawan
+    ├── feature/RADHITYA-kasir
+    ├── feature/RADHITYA-laporan-karyawan
     ├── feature/rafif-filament-dashboard
     ├── feature/rafif-verifikasi-kas
     └── feature/gading-manajemen-stok
@@ -511,11 +511,11 @@ beberapa Pull Request yang lebih mudah ditinjau.
 
 1.  Semua anggota memastikan baseline Laravel dapat berjalan.
 2.  Project Manager memastikan branch `develop` tersedia.
-3.  Adhitya mengajukan rancangan tabel dan model serah terima.
+3.  RADHITYA mengajukan rancangan tabel dan model serah terima.
 4.  Project Manager meninjau dan menyetujui struktur database.
-5.  Adhitya mengembangkan transaksi dan laporan karyawan.
+5.  RADHITYA mengembangkan transaksi dan laporan karyawan.
 6.  Gading mengembangkan halaman stok dan menyepakati kontrak
-    pengurangan stok dengan Adhitya.
+    pengurangan stok dengan RADHITYA.
 7.  Rafif mengembangkan Filament menggunakan model dan struktur data
     yang telah disepakati.
 8.  Setiap anggota mengirim Pull Request secara bertahap.
@@ -526,7 +526,7 @@ beberapa Pull Request yang lebih mudah ditinjau.
 
 ## 10. Checklist Sebelum Anggota Mulai
 
-### Adhitya
+### RADHITYA
 
 -   [ ] Sudah membaca README dan dokumen pembagian tugas.
 -   [ ] Sudah memeriksa model dan migration transaksi.
@@ -540,7 +540,7 @@ beberapa Pull Request yang lebih mudah ditinjau.
 -   [ ] Sudah memeriksa versi Filament yang terpasang.
 -   [ ] Sudah memastikan panel provider yang digunakan.
 -   [ ] Sudah memahami nilai role `admin` dan `karyawan`.
--   [ ] Sudah menyepakati struktur data serah terima dengan Adhitya.
+-   [ ] Sudah menyepakati struktur data serah terima dengan RADHITYA.
 -   [ ] Sudah membuat branch fitur.
 -   [ ] Tidak membuat model atau tabel serah terima duplikat.
 
@@ -548,7 +548,7 @@ beberapa Pull Request yang lebih mudah ditinjau.
 
 -   [ ] Sudah memeriksa struktur tabel barang.
 -   [ ] Sudah memahami kolom stok dan stok minimum.
--   [ ] Sudah menyepakati proses pengurangan stok dengan Adhitya.
+-   [ ] Sudah menyepakati proses pengurangan stok dengan RADHITYA.
 -   [ ] Sudah membuat branch fitur.
 -   [ ] Tidak mengubah harga atau identitas barang melalui akses
     karyawan.

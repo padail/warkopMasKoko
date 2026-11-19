@@ -18,7 +18,7 @@ dan Pull Request untuk modulnya.
   -----------------------------------------------------------------------
   Anggota                 Posisi                  Modul utama
   ----------------------- ----------------------- -----------------------
-  Adhitya Arif Atahillah  POS & Employee Sales    Kasir, transaksi,
+  RADHITYA Arif Atahillah  POS & Employee Sales    Kasir, transaksi,
                           Developer               laporan harian
                                                   karyawan, serah terima
                                                   kas
@@ -84,17 +84,17 @@ karena tampilannya sudah muncul.
 
 ------------------------------------------------------------------------
 
-# 3. ADHITYA ARIF ATAHILLAH
+# 3. RADHITYA ARIF ATAHILLAH
 
 ## POS, Transaksi, Laporan Penjualan Harian Karyawan, dan Serah Terima Kas
 
 ### 3.1 Tujuan
 
-Adhitya membangun alur yang digunakan karyawan ketika melayani
+RADHITYA membangun alur yang digunakan karyawan ketika melayani
 pelanggan. Fokus utamanya adalah mempercepat transaksi dan mengurangi
 kesalahan ketika pelanggan mengganti atau menghapus pesanan.
 
-Adhitya juga membangun laporan penjualan harian karyawan sebagai dasar
+RADHITYA juga membangun laporan penjualan harian karyawan sebagai dasar
 pencocokan uang tunai yang diserahkan kepada owner.
 
 ### 3.2 Modul A: Halaman Kasir Tailwind
@@ -214,7 +214,7 @@ Gunakan foreign key ke `users` untuk karyawan dan admin penerima.
 Terapkan unique constraint pada kombinasi `user_id` dan
 `tanggal_laporan` untuk mendukung satu laporan per karyawan per hari.
 
-Adhitya mengajukan rancangan migration kepada Project Manager untuk
+RADHITYA mengajukan rancangan migration kepada Project Manager untuk
 review sebelum merge.
 
 ### 3.8 File dan Area Kerja
@@ -259,7 +259,7 @@ tests/
 Periksa file yang sudah tersedia sebelum membuat file baru. Jangan
 membuat duplikat controller, model, atau route.
 
-### 3.9 Kriteria Penerimaan Adhitya
+### 3.9 Kriteria Penerimaan RADHITYA
 
 -   Halaman kasir dapat dibuka admin dan karyawan.
 -   Barang aktif tampil dan dapat dicari.
@@ -276,7 +276,7 @@ membuat duplikat controller, model, atau route.
 -   Karyawan tidak dapat mengubah laporan yang sudah dikirim.
 -   Test berhasil dan Pull Request telah direview.
 
-### 3.10 Pengujian Wajib Adhitya
+### 3.10 Pengujian Wajib RADHITYA
 
 1.  Tambah barang ke keranjang.
 2.  Ubah jumlah barang menjadi dua.
@@ -528,13 +528,13 @@ Daftar peringatan harus berasal dari database.
 
 ### 5.6 Modul E: Konsistensi dengan Transaksi
 
-Koordinasikan dengan Adhitya agar: - Stok produk berkurang setelah
+Koordinasikan dengan RADHITYA agar: - Stok produk berkurang setelah
 transaksi berhasil. - Transaksi gagal tidak mengurangi stok. - Barang
 tidak dapat dijual jika stok tidak mencukupi. - Pembaruan manual tidak
 menimpa perubahan transaksi secara tidak konsisten.
 
 Gading tidak boleh membuat mekanisme pengurangan stok kedua yang
-bertentangan dengan service transaksi Adhitya.
+bertentangan dengan service transaksi RADHITYA.
 
 ### 5.7 Modul F: Catatan Perubahan Stok
 
@@ -730,15 +730,15 @@ aktual dan catatan.
 
   Area                                         Pemilik utama
   -------------------------------------------- --------------------
-  `resources/views/kasir/`                     Adhitya
-  `resources/views/transaksi/`                 Adhitya
-  `resources/views/karyawan/laporan-harian/`   Adhitya
-  `KasirController.php`                        Adhitya
-  `TransaksiController.php`                    Adhitya
-  `LaporanHarianController.php`                Adhitya
-  `TransaksiService.php`                       Adhitya
-  `SerahTerimaKasService.php`                  Adhitya
-  migration dan model serah terima             Adhitya, review PM
+  `resources/views/kasir/`                     RADHITYA
+  `resources/views/transaksi/`                 RADHITYA
+  `resources/views/karyawan/laporan-harian/`   RADHITYA
+  `KasirController.php`                        RADHITYA
+  `TransaksiController.php`                    RADHITYA
+  `LaporanHarianController.php`                RADHITYA
+  `TransaksiService.php`                       RADHITYA
+  `SerahTerimaKasService.php`                  RADHITYA
+  migration dan model serah terima             RADHITYA, review PM
   `app/Filament/Pages/`                        Rafif
   `app/Filament/Widgets/`                      Rafif
   konfigurasi panel Filament                   Rafif
@@ -774,7 +774,7 @@ Manager.
 
 ## Tahap 2 - Pengembangan Paralel
 
-**Adhitya:** - Halaman kasir. - Interaksi keranjang. - Proses
+**RADHITYA:** - Halaman kasir. - Interaksi keranjang. - Proses
 transaksi. - Laporan harian. - Migration/model serah terima jika belum
 ada. - Form penyerahan uang.
 
@@ -787,9 +787,9 @@ inventaris.
 
 ## Tahap 3 - Integrasi
 
--   Adhitya dan Gading memastikan pengurangan stok transaksi tidak
+-   RADHITYA dan Gading memastikan pengurangan stok transaksi tidak
     bertabrakan dengan pembaruan stok manual.
--   Adhitya dan Rafif menyepakati struktur data serah terima.
+-   RADHITYA dan Rafif menyepakati struktur data serah terima.
 -   Rafif memastikan dashboard membaca data yang sama dengan laporan
     karyawan.
 -   Project Manager meninjau migration dan aturan bisnis.
@@ -949,7 +949,7 @@ Jelaskan risiko atau pekerjaan lanjutan.
 
 # 10. Checklist Akhir Per Anggota
 
-## Adhitya
+## RADHITYA
 
 -   [ ] Halaman kasir Tailwind selesai.
 -   [ ] Pencarian dan filter barang selesai.
