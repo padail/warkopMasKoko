@@ -41,7 +41,8 @@ warkop-management/
 │   │   │   │   └── TransaksiController.php
 │   │   │   │
 │   │   │   ├── Karyawan/                 # RADHITYA
-│   │   │   │   └── LaporanHarianController.php
+│   │   │   │   ├── LaporanHarianController.php
+│   │   │   │   └── PengeluaranController.php
 │   │   │   │
 │   │   │   └── Stok/                     # GADING
 │   │   │       └── StokController.php
@@ -56,7 +57,8 @@ warkop-management/
 │   │   ├── MenuBarang.php                # model inti, jangan diubah tanpa koordinasi
 │   │   ├── Transaksi.php                 # model inti, jangan diubah tanpa koordinasi
 │   │   ├── DetailTransaksi.php           # model inti, jangan diubah tanpa koordinasi
-│   │   └── SerahTerimaKas.php            # RADHITYA, jika tabel dibuat
+│   │   ├── Pengeluaran.php               # RADHITYA
+│   │   └── SerahTerimaKas.php            # RADHITYA
 │   │
 │   ├── Services/
 │   │   ├── Kasir/                        # RADHITYA
@@ -65,6 +67,8 @@ warkop-management/
 │   │   │
 │   │   ├── Stok/                         # GADING
 │   │   │   └── StokService.php
+│   │   ├── Karyawan/                     # RADHITYA
+│   │   │   └── RingkasanKeuanganService.php
 │   │   │
 │   │   └── OwnerDashboard/               # RAFIF, opsional untuk query dashboard
 │   │       └── OwnerDashboardService.php
@@ -78,9 +82,12 @@ warkop-management/
 │
 ├── database/
 │   ├── factories/
+│   │   └── PengeluaranFactory.php        # RADHITYA
 │   ├── migrations/                       # folder bersama, wajib review PM
 │   │   ├── ...migration baseline...
-│   │   └── xxxx_xx_xx_xxxxxx_create_serah_terima_kas_table.php
+│   │   ├── xxxx_xx_xx_xxxxxx_create_serah_terima_kas_table.php
+│   │   ├── xxxx_xx_xx_xxxxxx_create_pengeluaran_table.php
+│   │   └── xxxx_xx_xx_xxxxxx_add_split_amounts_to_serah_terima_kas_table.php
 │   └── seeders/                          # PM: data awal dan akun role
 │
 ├── docs/                                 # dokumentasi teknis tambahan
@@ -167,8 +174,7 @@ bukan perintah untuk memaksakan struktur versi tertentu.
 
 ### A. RADHITYA Arif Atahillah
 
-**Modul:** Kasir, transaksi, laporan harian karyawan, dan pengiriman
-serah terima kas.
+**Modul:** Kasir, transaksi, buku kas karyawan, dan setoran tunai/non-tunai.
 
 Folder utama yang menjadi tanggung jawab:
 
@@ -176,8 +182,10 @@ Folder utama yang menjadi tanggung jawab:
 app/Http/Controllers/Kasir/
 app/Http/Controllers/Karyawan/
 app/Http/Requests/Kasir/
+app/Models/Pengeluaran.php
 app/Models/SerahTerimaKas.php
 app/Services/Kasir/
+app/Services/Karyawan/
 database/migrations/                 # hanya migration baru, setelah review PM
 resources/views/kasir/
 resources/views/transaksi/
@@ -195,9 +203,10 @@ pemilihan barang. 3. Membuat keranjang yang dapat menambah, mengurangi,
 mengganti, dan menghapus barang. 4. Membuat proses pembayaran tunai,
 QRIS, dan GoPay. 5. Menyimpan transaksi dan detail transaksi. 6.
 Memastikan transaksi mencatat pengguna yang login. 7. Membuat laporan
-penjualan harian milik karyawan yang login. 8. Menghitung uang tunai
-yang harus diserahkan. 9. Membuat pengiriman laporan serah terima. 10.
-Membuat pengujian transaksi dan laporan.
+keuangan milik karyawan yang login. 8. Mencatat pengeluaran tunai dan
+non-tunai. 9. Menghitung saldo dan setoran tunai/non-tunai. 10. Membuat
+pengiriman laporan serah terima. 11. Membuat pengujian transaksi dan
+laporan.
 
 **Jangan mengubah tanpa koordinasi:** - `app/Models/User.php` - model
 inti transaksi dan barang - `routes/web.php` -
@@ -335,7 +344,7 @@ Contoh tanggung jawab route: - `GET /kasir` - `POST /kasir/transaksi` -
 ### `routes/karyawan.php` - RADHITYA
 
 Contoh tanggung jawab route: - `GET /karyawan/laporan-harian` -
-`GET /karyawan/laporan-harian/{tanggal}` - `POST /karyawan/serah-terima`
+`POST /karyawan/pengeluaran` - `POST /karyawan/serah-terima-kas`
 
 ### `routes/stok.php` - Gading
 

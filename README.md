@@ -41,6 +41,8 @@ database tanpa koordinasi.
 8.  Menyediakan dashboard owner untuk memantau penjualan seluruh
     karyawan.
 9.  Menyediakan peringatan stok minimum.
+10. Mencatat pemasukan dan pengeluaran karyawan menurut metode tunai dan
+     non-tunai.
 
 ## 3. Role dan Hak Akses
 
@@ -165,54 +167,39 @@ sebelum menyelesaikan transaksi. - Kembalian bernilai nol. - Transaksi
 non-tunai tidak masuk perhitungan uang fisik yang diserahkan kepada
 owner.
 
-### Laporan Penjualan Harian Karyawan
+### Laporan Keuangan Karyawan
 
-Halaman Tailwind menampilkan data milik karyawan yang sedang login: -
-Tanggal laporan. - Jumlah transaksi selesai. - Total penjualan. - Total
-tunai, QRIS, dan GoPay. - Uang tunai yang harus diserahkan. - Uang
-aktual yang diserahkan. - Selisih. - Status verifikasi.
+Laporan menampilkan catatan milik karyawan yang sedang login. Secara
+default laporan mencakup semua tanggal; filter tanggal opsional untuk
+melihat satu hari. Pemasukan berasal dari transaksi selesai, sementara
+karyawan dapat mencatat pengeluaran dengan tanggal, kategori,
+keterangan, nominal, dan metode pembayaran (`tunai` atau `non_tunai`).
 
-Karyawan dapat memilih tanggal laporan, tetapi tidak boleh mengakses
-laporan karyawan lain dengan mengganti URL atau parameter request.
+Ringkasan memisahkan pemasukan dan pengeluaran tunai/non-tunai serta
+menampilkan saldo bersih setiap jenis dan saldo keseluruhan. QRIS dan
+GoPay dikelompokkan sebagai pemasukan non-tunai.
 
-### Rekonsiliasi Uang Tunai
+### Rekonsiliasi Setoran
 
 Rumus yang digunakan:
 
-``` text
-uang_tunai_diharapkan = SUM(total transaksi tunai berstatus selesai)
-selisih = uang_diserahkan - uang_tunai_diharapkan
+```text
+pemasukan_tunai = SUM(total transaksi tunai berstatus selesai)
+pemasukan_non_tunai = SUM(total transaksi QRIS dan GoPay berstatus selesai)
+saldo_tunai = pemasukan_tunai - pengeluaran_tunai
+saldo_non_tunai = pemasukan_non_tunai - pengeluaran_non_tunai
+setoran_tunai_diharapkan = max(0, saldo_tunai)
+setoran_non_tunai_diharapkan = max(0, saldo_non_tunai)
 ```
 
-Jangan menjumlahkan `nominal_diterima` karena nilainya dapat mencakup
-uang kembalian.
+Karyawan mengirim jumlah aktual setoran tunai dan non-tunai secara
+terpisah untuk tanggal yang dipilih. Selisih dihitung per metode.
+Transaksi batal tidak dihitung, dan `nominal_diterima` tidak dijumlahkan
+karena nilainya dapat mencakup uang kembalian.
 
-Hanya transaksi dengan `user_id` karyawan yang bersangkutan, tanggal
-yang dipilih, metode `tunai`, dan status `selesai` yang dihitung. QRIS,
-GoPay, dan transaksi batal dikecualikan.
-
-Alur: 1. Karyawan membuka laporan harian. 2. Server menghitung uang
-tunai yang diharapkan. 3. Karyawan menghitung uang fisik dan menginput
-jumlah aktual. 4. Server menghitung selisih. 5. Sistem menyimpan laporan
-berstatus `menunggu_verifikasi`. 6. Owner memeriksa laporan melalui
-Filament. 7. Owner mengonfirmasi penerimaan. 8. Sistem menyimpan
-identitas admin dan waktu verifikasi. 9. Status berubah menjadi
-`terverifikasi`.
-
-Batasan versi pertama: - Satu laporan per karyawan per tanggal. - Tidak
-menghitung modal kas awal, biaya operasional, refund, atau pengeluaran
-kas. - Laporan dikirim setelah karyawan menyelesaikan transaksi hari
-tersebut. - Karyawan tidak dapat mengubah laporan setelah dikirim. -
-Jika dibutuhkan beberapa shift dalam satu hari, desain dikembangkan pada
-tahap berikutnya.
-
-Fitur ini membutuhkan penyimpanan permanen. Jika belum ada, buat
-migration pendukung `serah_terima_kas`. Kolom minimum: `id`, `user_id`,
-`tanggal_laporan`, `jumlah_transaksi_tunai`, `uang_tunai_diharapkan`,
-`uang_diserahkan`, `selisih`, `diterima_oleh`, `status`, `catatan`,
-`diserahkan_pada`, `diverifikasi_pada`, timestamps. Gunakan foreign key
-ke `users`, serta unique constraint pada kombinasi `user_id` dan
-`tanggal_laporan`. Migration harus direview Project Manager.
+Data laporan dibatasi ke `user_id` karyawan yang sedang login. Filter
+URL tidak boleh memungkinkan karyawan mengakses transaksi atau
+pengeluaran karyawan lain.
 
 ### Manajemen Stok
 

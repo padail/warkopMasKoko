@@ -29,13 +29,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
     protected $fillable = [
         'name',
         'email',
         'password',
         'role',
     ];
+
     public const ROLE_ADMIN = 'admin';
+
     public const ROLE_KARYAWAN = 'karyawan';
 
     public function isAdmin(): bool
@@ -47,8 +50,10 @@ class User extends Authenticatable
     {
         return $this->role === self::ROLE_KARYAWAN;
     }
+
     public function transaksi()
     {
         return $this->hasMany(Transaksi::class, 'user_id');
     }
+
 }

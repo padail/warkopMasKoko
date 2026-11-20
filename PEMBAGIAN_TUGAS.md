@@ -86,7 +86,7 @@ karena tampilannya sudah muncul.
 
 # 3. RADHITYA ARIF ATAHILLAH
 
-## POS, Transaksi, Laporan Penjualan Harian Karyawan, dan Serah Terima Kas
+## POS, Transaksi, Buku Kas Karyawan, dan Setoran
 
 ### 3.1 Tujuan
 
@@ -167,43 +167,53 @@ login.
 Simpan nama dan harga saat transaksi sebagai snapshot. Perubahan harga
 di masa depan tidak boleh mengubah riwayat transaksi.
 
-### 3.6 Modul E: Laporan Penjualan Harian Karyawan
+### 3.6 Modul E: Buku Kas Karyawan
 
-Buat halaman Tailwind yang hanya menampilkan transaksi milik pengguna
-yang sedang login.
+Buat halaman laporan keuangan Tailwind yang hanya menampilkan data milik
+karyawan yang sedang login. Secara default tampilkan semua tanggal;
+filter tanggal bersifat opsional.
 
-Informasi minimum: - Tanggal laporan. - Jumlah transaksi selesai. -
-Total penjualan. - Total tunai. - Total QRIS. - Total GoPay. - Uang
-tunai yang harus diserahkan. - Uang aktual yang diserahkan. - Selisih. -
-Status serah terima.
+Informasi minimum: - Jumlah dan total pemasukan transaksi selesai. -
+Pemasukan tunai dan non-tunai. - Riwayat transaksi. - Total pengeluaran
+tunai dan non-tunai. - Saldo bersih tunai, non-tunai, dan keseluruhan. -
+Riwayat pengeluaran.
 
-Tambahkan filter tanggal.
+Karyawan dapat mencatat pengeluaran dengan tanggal, kategori,
+keterangan, nominal, dan metode pembayaran `tunai` atau `non_tunai`.
+Pengeluaran harus disimpan dengan `user_id` dari sesi login, bukan dari
+browser. Validasi nominal harus lebih besar dari nol.
 
 **Keamanan:** query laporan karyawan wajib menggunakan identitas
 pengguna yang sedang login. Jangan mengambil data berdasarkan `user_id`
 bebas dari URL atau request.
 
-### 3.7 Modul F: Serah Terima Uang Tunai
+### 3.7 Modul F: Setoran Tunai dan Non-tunai
 
-Rumus:
+Rumus per tanggal:
 
 ``` text
-uang_tunai_diharapkan = SUM(total transaksi tunai berstatus selesai)
-selisih = uang_diserahkan - uang_tunai_diharapkan
+pemasukan_tunai = SUM(total transaksi tunai berstatus selesai)
+pemasukan_non_tunai = SUM(total transaksi qris/gopay berstatus selesai)
+saldo_tunai = pemasukan_tunai - pengeluaran_tunai
+saldo_non_tunai = pemasukan_non_tunai - pengeluaran_non_tunai
+setoran_tunai_diharapkan = max(0, saldo_tunai)
+setoran_non_tunai_diharapkan = max(0, saldo_non_tunai)
 ```
 
-Jangan menjumlahkan `nominal_diterima`, karena nilai tersebut dapat
-mencakup uang kembalian.
+Karyawan menginput setoran aktual tunai dan non-tunai secara terpisah.
+Server menghitung selisih untuk setiap metode. Jangan menjumlahkan
+`nominal_diterima`, karena nilai tersebut dapat mencakup uang kembalian.
 
-Alur: 1. Karyawan membuka laporan harian. 2. Sistem menghitung total
-tunai. 3. Karyawan menghitung uang fisik. 4. Karyawan menginput uang
-aktual. 5. Server menghitung selisih. 6. Karyawan mengirim laporan. 7.
-Sistem menyimpan status `menunggu_verifikasi`. 8. Karyawan tidak dapat
-mengubah laporan setelah dikirim. 9. Owner memeriksa dan memverifikasi
-melalui Filament.
+Alur: 1. Karyawan memilih tanggal pada laporan. 2. Sistem menghitung
+pemasukan dan pengeluaran untuk tanggal tersebut. 3. Karyawan
+mencocokkan saldo tunai dan non-tunai aktual. 4. Karyawan mengirim kedua
+nominal setoran. 5. Server menghitung selisih masing-masing metode. 6.
+Sistem menyimpan status `menunggu`. 7. Owner memeriksa dan
+memverifikasi melalui Filament.
 
 Jika tabel belum tersedia, buat migration pendukung `serah_terima_kas`.
 Jangan mengubah migration baseline yang sudah dijalankan bersama.
+Pengeluaran disimpan pada tabel `pengeluaran` dan ditautkan ke karyawan.
 
 Kolom minimum: - `id` - `user_id` - `tanggal_laporan` -
 `jumlah_transaksi_tunai` - `uang_tunai_diharapkan` - `uang_diserahkan` -

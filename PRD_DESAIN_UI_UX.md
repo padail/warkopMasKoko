@@ -400,26 +400,27 @@ Aturan visual:
 - Tombol karyawan hanya menampilkan aksi yang diizinkan, tetapi backend tetap wajib memvalidasi role.
 - Harga dan identitas barang tidak boleh tampak dapat diedit oleh karyawan.
 
-### 9.3 Laporan Harian Karyawan - Blade + Tailwind
+### 9.3 Laporan Keuangan Karyawan - Blade + Tailwind
 
-Tujuan: memudahkan karyawan mencocokkan hasil penjualan tunai dengan uang fisik.
+Tujuan: membantu karyawan mencatat pemasukan, pengeluaran, saldo, dan
+setoran dari transaksi hariannya.
 
 Susunan:
-- Judul “Laporan Penjualan Harian”.
-- Filter tanggal.
-- Ringkasan jumlah transaksi dan total penjualan.
-- Rincian tunai, QRIS, dan GoPay.
-- Panel khusus “Uang Tunai yang Harus Diserahkan”.
-- Form input uang aktual.
-- Tampilan selisih yang jelas.
-- Status serah terima dan waktu pengiriman.
+- Judul “Laporan Keuangan”.
+- Ringkasan semua tanggal sebagai tampilan awal dan filter tanggal opsional.
+- Pemasukan dan pengeluaran dipisahkan menjadi tunai dan non-tunai.
+- Saldo bersih tunai, non-tunai, dan keseluruhan.
+- Form pencatatan pengeluaran berisi tanggal, kategori, keterangan, nominal, dan metode.
+- Riwayat pemasukan dan pengeluaran dengan tanggal dan metode pembayaran.
+- Panel setoran harian saat satu tanggal dipilih.
+- Form jumlah setoran aktual tunai dan non-tunai.
+- Tampilan selisih dan status pengiriman.
 
 Aturan visual:
-- Uang tunai yang harus diserahkan menjadi informasi paling menonjol.
-- QRIS dan GoPay ditampilkan terpisah dari uang tunai.
-- Selisih kurang, sesuai, atau lebih harus memiliki label teks.
-- Jika laporan sudah dikirim, form berubah menjadi mode baca saja.
-- Karyawan hanya melihat data miliknya.
+- Pemasukan, pengeluaran, dan saldo memiliki label yang jelas; warna tidak menjadi satu-satunya penanda.
+- QRIS dan GoPay dikelompokkan sebagai pemasukan non-tunai.
+- Setoran dan selisih tunai/non-tunai ditampilkan terpisah.
+- Karyawan hanya melihat catatan miliknya.
 
 ### 9.4 Dashboard Owner - Filament
 
