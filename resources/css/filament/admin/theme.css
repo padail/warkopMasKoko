@@ -1,0 +1,22 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/filament/**/*';
+
+@theme {
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+
+    --color-brand-50: #f7f5f1;
+    --color-brand-100: #f1eee8;
+    --color-brand-200: #e4ded6;
+    --color-brand-500: #805b42;
+    --color-brand-600: #805b42;
+    --color-brand-700: #6f4e37;
+    --color-brand-900: #3b2a20;
+
+    --color-accent-500: #d6a354;
+
+    --color-surface: #ffffff;
+    --color-surface-muted: #f1eee8;
+    --color-line: #e4ded6;
+}
