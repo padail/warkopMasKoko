@@ -36,3 +36,5 @@ Route::middleware(['auth', 'role:karyawan'])->group(function () {
     Route::post('/karyawan/serah-terima-kas', [SerahTerimaKasController::class, 'store'])
         ->name('karyawan.serah-terima-kas.store');
 });
+
+require __DIR__.'/stok.php';
