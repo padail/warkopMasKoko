@@ -147,6 +147,37 @@ class OwnerDashboardService
     }
 
     /**
+     * @return array{
+     *     active_count: int,
+     *     sold_count: int,
+     *     out_count: int,
+     *     low_count: int,
+     *     safe_count: int
+     * }
+     */
+    public function stockSummary(): array
+    {
+        $activeItems = MenuBarang::query()->where('is_active', true);
+
+        $outCount = (clone $activeItems)->where('stok', '<=', 0)->count();
+        $lowCount = (clone $activeItems)
+            ->where('stok', '>', 0)
+            ->whereColumn('stok', '<=', 'stok_minimum')
+            ->count();
+        $safeCount = (clone $activeItems)
+            ->whereColumn('stok', '>', 'stok_minimum')
+            ->count();
+
+        return [
+            'active_count' => (clone $activeItems)->count(),
+            'sold_count' => (clone $activeItems)->where('is_dijual', true)->count(),
+            'out_count' => $outCount,
+            'low_count' => $lowCount,
+            'safe_count' => $safeCount,
+        ];
+    }
+
+    /**
      * @return Builder<Transaksi>
      */
     public function latestTransactions(?array $filters = null): Builder
