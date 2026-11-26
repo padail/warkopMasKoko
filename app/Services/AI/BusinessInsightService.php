@@ -34,6 +34,8 @@ class BusinessInsightService
         ];
         $previousSales = $this->dashboard->salesSummary($previousFilters);
 
+        $stockSummary = $this->dashboard->stockSummary();
+
         return [
             'period' => [
                 'start' => $range['start']->toDateString(),
@@ -49,7 +51,23 @@ class BusinessInsightService
             ),
             'top_products' => $this->topProducts($range['start'], $range['end']),
             'stock' => [
-                'summary' => $this->dashboard->stockSummary(),
+                'as_of' => now()->toIso8601String(),
+                'summary' => [
+                    'active_count' => $stockSummary['active_count'],
+                    // sold_count pada OwnerDashboardService sebenarnya menghitung
+                    // barang yang ditandai is_dijual, bukan jumlah unit terjual.
+                    'for_sale_count' => $stockSummary['sold_count'],
+                    'out_count' => $stockSummary['out_count'],
+                    'low_count' => $stockSummary['low_count'],
+                    'safe_count' => $stockSummary['safe_count'],
+                ],
+                'definitions' => [
+                    'active_count' => 'Jumlah barang aktif di master persediaan.',
+                    'for_sale_count' => 'Jumlah barang yang ditandai untuk dijual, bukan jumlah barang yang sudah terjual.',
+                    'out_count' => 'Jumlah barang aktif dengan stok nol atau kurang.',
+                    'low_count' => 'Jumlah barang aktif dengan stok di atas nol tetapi sama dengan atau di bawah batas minimum.',
+                    'safe_count' => 'Jumlah barang aktif dengan stok di atas batas minimum.',
+                ],
                 'alerts' => $this->dashboard->lowStockItems()
                     ->map(fn ($item): array => [
                         'name' => (string) $item->nama,

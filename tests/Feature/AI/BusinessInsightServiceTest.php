@@ -200,6 +200,8 @@ test('it summarizes current stock alerts and expenses by category', function () 
     ]);
 
     expect($context['stock']['summary']['active_count'])->toBe(2)
+        ->and($context['stock']['summary']['for_sale_count'])->toBe(0)
+        ->and($context['stock']['summary'])->not->toHaveKey('sold_count')
         ->and($context['stock']['summary']['low_count'])->toBe(1)
         ->and($context['stock']['alerts'])->toHaveCount(1)
         ->and($context['stock']['alerts'][0]['name'])->toBe('Gula')

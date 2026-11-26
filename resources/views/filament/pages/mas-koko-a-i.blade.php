@@ -227,7 +227,9 @@
                             <p class="mb-1 text-xs font-semibold opacity-70">
                                 {{ $message['role'] === 'user' ? 'Owner' : 'Mas Koko AI' }}
                             </p>
-                            <div class="whitespace-pre-wrap break-words leading-6">{{ $message['content'] }}</div>
+                            <div class="break-words leading-6 space-y-2 [&_p]:mb-2 [&_ul]:my-2 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:my-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:my-1 [&_strong]:font-semibold [&_h1]:mb-2 [&_h1]:text-base [&_h1]:font-semibold [&_h2]:mb-2 [&_h2]:text-base [&_h2]:font-semibold [&_h3]:mb-2 [&_h3]:text-sm [&_h3]:font-semibold">
+                                {!! app(\App\Services\AI\AIResponseFormatter::class)->toHtml($message['content']) !!}
+                            </div>
                         </div>
                     </div>
                 @empty
