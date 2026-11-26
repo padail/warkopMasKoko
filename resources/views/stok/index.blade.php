@@ -11,15 +11,13 @@
             </p>
         </div>
 
-        @if (auth()->user()->isAdmin())
-            <button
-                type="button"
-                onclick="document.getElementById('modal-tambah-barang').classList.remove('hidden')"
-                class="inline-flex h-10 items-center justify-center rounded-lg bg-[#6F4E37] px-4 text-sm font-semibold text-white transition hover:bg-[#805B42]"
-            >
-                + Tambah Barang
-            </button>
-        @endif
+        <button
+            type="button"
+            onclick="document.getElementById('modal-tambah-barang').classList.remove('hidden')"
+            class="inline-flex h-10 items-center justify-center rounded-lg bg-[#6F4E37] px-4 text-sm font-semibold text-white transition hover:bg-[#805B42]"
+        >
+            + Tambah Barang
+        </button>
     </div>
 
     {{-- Notifikasi Sukses / Error --}}
@@ -189,21 +187,19 @@
                                         href="{{ route('stok.edit', $item) }}"
                                         class="inline-flex h-8 items-center rounded-lg border border-[#E4DED6] bg-white px-3 text-xs font-semibold text-[#6F4E37] transition hover:bg-[#EFE7DF]"
                                     >
-                                        {{ auth()->user()->isAdmin() ? 'Kelola' : 'Ubah Stok' }}
+                                        Kelola
                                     </a>
 
-                                    @if (auth()->user()->isAdmin())
-                                        <form method="POST" action="{{ route('stok.toggle-active', $item) }}" class="inline">
-                                            @csrf
-                                            @method('PATCH')
-                                            <button
-                                                type="submit"
-                                                class="inline-flex h-8 items-center rounded-lg px-2.5 text-xs font-semibold {{ $item->is_active ? 'text-[#B42318] hover:bg-[#FDECEC]' : 'text-[#237A57] hover:bg-[#E8F4ED]' }}"
-                                            >
-                                                {{ $item->is_active ? 'Nonaktifkan' : 'Aktifkan' }}
-                                            </button>
-                                        </form>
-                                    @endif
+                                    <form method="POST" action="{{ route('stok.toggle-active', $item) }}" class="inline">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button
+                                            type="submit"
+                                            class="inline-flex h-8 items-center rounded-lg px-2.5 text-xs font-semibold {{ $item->is_active ? 'text-[#B42318] hover:bg-[#FDECEC]' : 'text-[#237A57] hover:bg-[#E8F4ED]' }}"
+                                        >
+                                            {{ $item->is_active ? 'Nonaktifkan' : 'Aktifkan' }}
+                                        </button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
@@ -229,9 +225,8 @@
     </div>
 </div>
 
-{{-- Modal Tambah Barang (Khusus Admin) --}}
-@if (auth()->user()->isAdmin())
-    <div id="modal-tambah-barang" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/40 p-4 flex">
+{{-- Modal Tambah Barang --}}
+<div id="modal-tambah-barang" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/40 p-4 flex">
         <div class="w-full max-w-lg rounded-xl border border-[#E4DED6] bg-white p-6">
             <div class="mb-4 flex items-center justify-between">
                 <h2 class="text-lg font-semibold text-[#26221E]">Tambah Barang Baru</h2>
@@ -318,6 +313,5 @@
                 </div>
             </form>
         </div>
-    </div>
-@endif
+</div>
 @endsection

@@ -137,7 +137,7 @@ class StokService
     }
 
     /**
-     * Membuat barang baru (khusus admin).
+     * Membuat barang baru.
      *
      * @param  array<string, mixed>  $data
      */
@@ -159,7 +159,7 @@ class StokService
     }
 
     /**
-     * Memperbarui identitas, harga, satuan, dan status barang (khusus admin).
+     * Memperbarui identitas, harga, satuan, dan status barang.
      *
      * @param  array<string, mixed>  $data
      */

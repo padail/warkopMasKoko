@@ -6,38 +6,50 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
-it('prevents karyawan from changing item price, identity, or status even via direct request', function (): void {
+it('allows karyawan to create, update details, deactivate items, and update stock', function (): void {
     $karyawan = User::factory()->create(['role' => User::ROLE_KARYAWAN]);
 
-    $item = MenuBarang::create([
-        'nama' => 'Milo',
-        'kategori' => 'Minuman',
-        'harga_jual' => 6000,
-        'stok' => 12,
-        'satuan' => 'pcs',
-        'stok_minimum' => 4,
-        'is_dijual' => true,
-        'is_active' => true,
-    ]);
-
-    // Karyawan tidak bisa hit endpoint update detail (403)
     $this->actingAs($karyawan)
-        ->put(route('stok.update', $item), [
-            'nama' => 'Milo Ilegal',
-            'kategori' => 'Snack',
-            'harga_jual' => 1000,
+        ->post(route('stok.store'), [
+            'nama' => 'Milo',
+            'kategori' => 'Minuman',
+            'harga_jual' => 6000,
             'stok' => 12,
             'satuan' => 'pcs',
             'stok_minimum' => 4,
             'is_dijual' => true,
             'is_active' => true,
         ])
-        ->assertForbidden();
+        ->assertRedirect(route('stok.index'));
 
-    // Karyawan tidak bisa menonaktifkan barang (403)
+    $item = MenuBarang::where('nama', 'Milo')->firstOrFail();
+
+    $this->actingAs($karyawan)
+        ->get(route('stok.edit', $item))
+        ->assertOk()
+        ->assertSeeText('Edit Identitas & Harga Barang');
+
+    $this->actingAs($karyawan)
+        ->put(route('stok.update', $item), [
+            'nama' => 'Milo Susu',
+            'kategori' => 'Minuman',
+            'harga_jual' => 7000,
+            'stok' => 12,
+            'satuan' => 'pcs',
+            'stok_minimum' => 4,
+            'is_dijual' => true,
+            'is_active' => true,
+        ])
+        ->assertRedirect(route('stok.index'));
+
+    expect($item->fresh()->nama)->toBe('Milo Susu')
+        ->and($item->fresh()->harga_jual)->toBe(7000);
+
     $this->actingAs($karyawan)
         ->patch(route('stok.toggle-active', $item))
-        ->assertForbidden();
+        ->assertRedirect(route('stok.index'));
+
+    expect($item->fresh()->is_active)->toBeFalse();
 
     // Meski karyawan menyisipkan harga_jual ke endpoint update-stok, harga tidak berubah
     $this->actingAs($karyawan)
@@ -52,8 +64,8 @@ it('prevents karyawan from changing item price, identity, or status even via dir
 
     $item->refresh();
     expect((float) $item->stok)->toBe(20.0)
-        ->and($item->harga_jual)->toBe(6000)
-        ->and($item->nama)->toBe('Milo');
+        ->and($item->harga_jual)->toBe(7000)
+        ->and($item->nama)->toBe('Milo Susu');
 });
 
 it('allows admin to create, update details, and deactivate items', function (): void {

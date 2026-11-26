@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Stok;
 
+use App\Models\User;
 use App\Services\StokService;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -11,7 +12,9 @@ class UpdateMenuBarangRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return (bool) $this->user()?->isAdmin();
+        $user = $this->user();
+
+        return $user !== null && in_array($user->role, [User::ROLE_ADMIN, User::ROLE_KARYAWAN], true);
     }
 
     /**
