@@ -9,9 +9,15 @@ use App\Http\Controllers\Kasir\TransaksiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return auth()->guard()->check()
-        ? redirect()->route('kasir.index')
-        : redirect()->route('login');
+    if (! auth()->check()) {
+        return redirect()->route('login');
+    }
+
+    return match (auth()->user()->role) {
+        'admin' => redirect('/admin'),
+        'karyawan' => redirect()->route('kasir.index'),
+        default => redirect()->route('login'),
+    };
 });
 
 Route::middleware('guest')->group(function () {
@@ -36,3 +42,5 @@ Route::middleware(['auth', 'role:karyawan'])->group(function () {
     Route::post('/karyawan/serah-terima-kas', [SerahTerimaKasController::class, 'store'])
         ->name('karyawan.serah-terima-kas.store');
 });
+
+require __DIR__.'/stok.php';

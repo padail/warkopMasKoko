@@ -29,8 +29,13 @@ class LoginController extends Controller
         }
 
         $request->session()->regenerate();
+        $user = Auth::user();
 
-        return redirect()->route('kasir.index');
+        return match ($user->role) {
+            'admin' => redirect('/admin'),
+            'karyawan' => redirect()->route('kasir.index'),
+            default => redirect()->route('login'),
+        };
     }
 
     public function destroy(Request $request): RedirectResponse

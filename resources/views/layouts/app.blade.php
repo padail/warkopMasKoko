@@ -17,6 +17,7 @@
                 </div>
                 <nav class="flex items-center gap-3 text-sm">
                     <a class="rounded-lg px-3 py-2 hover:bg-[#F1EEE8]" href="{{ route('kasir.index') }}">Kasir</a>
+                    <a class="rounded-lg px-3 py-2 hover:bg-[#F1EEE8]" href="{{ route('stok.index') }}">Stok</a>
                     @if(auth()->user()->isKaryawan())
                         <a class="rounded-lg px-3 py-2 hover:bg-[#F1EEE8]" href="{{ route('karyawan.laporan-harian') }}">Laporan</a>
                     @endif
