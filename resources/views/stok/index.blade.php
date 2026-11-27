@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="mx-auto max-w-[1440px] px-4 py-6 md:px-5 lg:px-6">
+<div class="mx-auto max-w-[1440px] px-4 py-4 pb-8 md:px-5 md:py-6 lg:px-6">
     {{-- Header Halaman --}}
-    <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div class="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
             <h1 class="text-2xl font-bold tracking-tight text-[#26221E]">Manajemen Stok</h1>
             <p class="mt-1 text-sm text-[#70685F]">
@@ -14,7 +14,7 @@
         <button
             type="button"
             onclick="document.getElementById('modal-tambah-barang').classList.remove('hidden')"
-            class="inline-flex h-10 items-center justify-center rounded-lg bg-[#6F4E37] px-4 text-sm font-semibold text-white transition hover:bg-[#805B42]"
+            class="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-[#6F4E37] px-4 text-sm font-semibold text-white transition hover:bg-[#805B42] sm:w-auto"
         >
             + Tambah Barang
         </button>
@@ -39,25 +39,25 @@
     @endif
 
     {{-- KPI Ringkasan Stok --}}
-    <div class="mb-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <div class="rounded-xl border border-[#E4DED6] bg-white p-5">
+    <div class="mb-5 grid grid-cols-2 gap-3 lg:grid-cols-4">
+        <div class="min-w-0 rounded-xl border border-[#E4DED6] bg-white p-3 sm:p-5">
             <p class="text-sm font-medium text-[#70685F]">Total Barang Aktif</p>
             <p class="mt-2 text-2xl font-bold text-[#26221E]">{{ $summary['total'] }}</p>
             <p class="mt-1 text-xs text-[#70685F]">Menu jualan & bahan baku</p>
         </div>
-        <div class="rounded-xl border border-[#E4DED6] bg-white p-5">
+        <div class="min-w-0 rounded-xl border border-[#E4DED6] bg-white p-3 sm:p-5">
             <p class="text-sm font-medium text-[#70685F]">Stok Normal</p>
             <p class="mt-2 text-2xl font-bold text-[#237A57]">{{ $summary['normal'] }}</p>
             <p class="mt-1 text-xs text-[#70685F]">Di atas batas minimum</p>
         </div>
         <a href="{{ route('stok.index', ['status_stok' => 'menipis']) }}"
-           class="block rounded-xl border border-[#E4DED6] bg-white p-5 transition hover:border-[#A86412]">
+           class="block min-w-0 rounded-xl border border-[#E4DED6] bg-white p-3 transition hover:border-[#A86412] sm:p-5">
             <p class="text-sm font-medium text-[#70685F]">Stok Menipis</p>
             <p class="mt-2 text-2xl font-bold text-[#A86412]">{{ $summary['menipis'] }}</p>
             <p class="mt-1 text-xs text-[#A86412]">Stok &le; batas minimum</p>
         </a>
         <a href="{{ route('stok.index', ['status_stok' => 'habis']) }}"
-           class="block rounded-xl border border-[#E4DED6] bg-white p-5 transition hover:border-[#B42318]">
+           class="block min-w-0 rounded-xl border border-[#E4DED6] bg-white p-3 transition hover:border-[#B42318] sm:p-5">
             <p class="text-sm font-medium text-[#70685F]">Stok Habis</p>
             <p class="mt-2 text-2xl font-bold text-[#B42318]">{{ $summary['habis'] }}</p>
             <p class="mt-1 text-xs text-[#B42318]">Perlu restok segera</p>
@@ -65,7 +65,7 @@
     </div>
 
     {{-- Filter & Pencarian --}}
-    <div class="mb-6 rounded-xl border border-[#E4DED6] bg-white p-5">
+    <div class="mb-5 rounded-xl border border-[#E4DED6] bg-white p-4 sm:p-5">
         <form method="GET" action="{{ route('stok.index') }}" class="grid grid-cols-1 gap-4 md:grid-cols-12">
             <div class="md:col-span-5">
                 <label for="search" class="mb-1.5 block text-sm font-medium text-[#26221E]">Cari Barang</label>
@@ -75,7 +75,7 @@
                     type="text"
                     value="{{ $filters['search'] ?? '' }}"
                     placeholder="Cari nama barang..."
-                    class="min-h-10 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-sm text-[#26221E] placeholder-[#A8A29B] focus:border-[#6F4E37] focus:outline-none focus:ring-2 focus:ring-[#6F4E37]/20"
+                    class="min-h-11 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-base sm:text-sm text-[#26221E] placeholder-[#A8A29B] focus:border-[#6F4E37] focus:outline-none focus:ring-2 focus:ring-[#6F4E37]/20"
                 >
             </div>
 
@@ -84,7 +84,7 @@
                 <select
                     id="kategori"
                     name="kategori"
-                    class="min-h-10 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none focus:ring-2 focus:ring-[#6F4E37]/20"
+                    class="min-h-11 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-base sm:text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none focus:ring-2 focus:ring-[#6F4E37]/20"
                 >
                     <option value="semua">Semua Kategori</option>
                     @foreach ($categories as $category)
@@ -100,7 +100,7 @@
                 <select
                     id="status_stok"
                     name="status_stok"
-                    class="min-h-10 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none focus:ring-2 focus:ring-[#6F4E37]/20"
+                    class="min-h-11 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-base sm:text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none focus:ring-2 focus:ring-[#6F4E37]/20"
                 >
                     <option value="semua">Semua Status</option>
                     <option value="normal" @selected(($filters['status_stok'] ?? '') === 'normal')>Normal</option>
@@ -112,14 +112,14 @@
             <div class="flex items-end gap-2 md:col-span-2">
                 <button
                     type="submit"
-                    class="inline-flex h-10 flex-1 items-center justify-center rounded-lg bg-[#6F4E37] px-4 text-sm font-semibold text-white transition hover:bg-[#805B42]"
+                    class="inline-flex min-h-11 flex-1 items-center justify-center rounded-lg bg-[#6F4E37] px-4 text-sm font-semibold text-white transition hover:bg-[#805B42]"
                 >
                     Filter
                 </button>
                 @if (request()->hasAny(['search', 'kategori', 'status_stok']))
                     <a
                         href="{{ route('stok.index') }}"
-                        class="inline-flex h-10 items-center justify-center rounded-lg border border-[#E4DED6] bg-white px-3 text-sm font-medium text-[#70685F] hover:bg-[#F1EEE8]"
+                        class="inline-flex min-h-11 items-center justify-center rounded-lg border border-[#E4DED6] bg-white px-3 text-sm font-medium text-[#70685F] hover:bg-[#F1EEE8]"
                     >
                         Reset
                     </a>
@@ -130,7 +130,7 @@
 
     {{-- Tabel Daftar Stok --}}
     <div class="overflow-hidden rounded-xl border border-[#E4DED6] bg-white">
-        <div class="overflow-x-auto">
+        <div class="hidden overflow-x-auto md:block">
             <table class="w-full border-collapse text-left">
                 <thead>
                     <tr class="border-b border-[#E4DED6] bg-[#F1EEE8] text-xs font-semibold uppercase tracking-wide text-[#70685F]">
@@ -217,6 +217,81 @@
             </table>
         </div>
 
+
+        <div class="divide-y divide-[#E4DED6] md:hidden">
+            @forelse ($items as $item)
+                <article class="space-y-3 p-4 {{ ! $item->is_active ? 'bg-[#F7F5F1] opacity-70' : '' }}">
+                    <div class="flex items-start justify-between gap-3">
+                        <div class="min-w-0">
+                            <p class="break-words text-sm font-semibold text-[#26221E]">{{ $item->nama }}</p>
+                            <p class="mt-1 text-xs text-[#70685F]">
+                                {{ $item->kategori }} · {{ $item->is_dijual ? 'Dijual di kasir' : 'Bahan baku' }}
+                            </p>
+                        </div>
+                        <div class="shrink-0">
+                            @include('stok.partials.stock-status', ['item' => $item])
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 rounded-lg bg-[#F7F5F1] p-3">
+                        <div>
+                            <p class="text-xs text-[#70685F]">Stok saat ini</p>
+                            <p class="mt-1 text-base font-bold text-[#26221E]">
+                                {{ rtrim(rtrim(number_format((float) $item->stok, 3, ',', '.'), '0'), ',') }}
+                                <span class="text-xs font-normal text-[#70685F]">{{ $item->satuan }}</span>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-[#70685F]">Stok minimum</p>
+                            <p class="mt-1 text-sm font-semibold text-[#26221E]">
+                                {{ rtrim(rtrim(number_format((float) $item->stok_minimum, 3, ',', '.'), '0'), ',') }}
+                                {{ $item->satuan }}
+                            </p>
+                        </div>
+                        <div class="col-span-2 border-t border-[#E4DED6] pt-2">
+                            <p class="text-xs text-[#70685F]">Harga jual</p>
+                            <p class="mt-1 text-sm font-semibold text-[#26221E]">
+                                {{ $item->is_dijual ? 'Rp '.number_format($item->harga_jual, 0, ',', '.') : 'Tidak dijual langsung' }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="text-xs leading-5 text-[#70685F]">
+                        <span class="font-medium text-[#26221E]">Pembaruan terakhir:</span>
+                        @if ($item->stok_diperbarui_pada)
+                            {{ $item->stok_diperbarui_pada->format('d/m/Y H:i') }}
+                            · {{ $item->stokDiperbaruiOleh?->name ?? 'Sistem' }}
+                        @else
+                            {{ $item->updated_at?->format('d/m/Y H:i') ?? '-' }}
+                        @endif
+                        @if ($item->alasan_perubahan_stok)
+                            <span class="block">{{ $item->alasan_perubahan_stok }}</span>
+                        @endif
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <a href="{{ route('stok.edit', $item) }}"
+                           class="inline-flex min-h-11 items-center justify-center rounded-lg border border-[#E4DED6] bg-white px-3 text-sm font-semibold text-[#6F4E37]">
+                            Kelola stok
+                        </a>
+                        <form method="POST" action="{{ route('stok.toggle-active', $item) }}">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit"
+                                    class="inline-flex min-h-11 w-full items-center justify-center rounded-lg px-3 text-sm font-semibold {{ $item->is_active ? 'bg-[#FDECEC] text-[#B42318]' : 'bg-[#E8F4ED] text-[#237A57]' }}">
+                                {{ $item->is_active ? 'Nonaktifkan' : 'Aktifkan' }}
+                            </button>
+                        </form>
+                    </div>
+                </article>
+            @empty
+                <div class="px-4 py-12 text-center">
+                    <p class="text-sm font-semibold text-[#26221E]">Barang tidak ditemukan</p>
+                    <p class="mt-1 text-xs text-[#70685F]">Coba ubah kata kunci pencarian atau reset filter.</p>
+                </div>
+            @endforelse
+        </div>
+
         @if ($items->hasPages())
             <div class="border-t border-[#E4DED6] bg-[#F7F5F1] px-4 py-3">
                 {{ $items->links() }}
@@ -226,8 +301,8 @@
 </div>
 
 {{-- Modal Tambah Barang --}}
-<div id="modal-tambah-barang" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/40 p-4 flex">
-        <div class="w-full max-w-lg rounded-xl border border-[#E4DED6] bg-white p-6">
+<div id="modal-tambah-barang" class="fixed inset-0 z-50 hidden items-start justify-center overflow-y-auto bg-black/40 p-3 sm:items-center sm:p-4 flex">
+        <div class="my-auto max-h-[calc(100dvh-1.5rem)] w-full max-w-lg overflow-y-auto rounded-xl border border-[#E4DED6] bg-white p-4 sm:max-h-[calc(100dvh-2rem)] sm:p-6">
             <div class="mb-4 flex items-center justify-between">
                 <h2 class="text-lg font-semibold text-[#26221E]">Tambah Barang Baru</h2>
                 <button
@@ -246,14 +321,14 @@
                     <label for="create_nama" class="mb-1.5 block text-sm font-medium text-[#26221E]">Nama Barang</label>
                     <input id="create_nama" name="nama" type="text" required value="{{ old('nama') }}"
                            placeholder="Contoh: Milo Renteng, Ayam Potong"
-                           class="min-h-10 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none">
+                           class="min-h-11 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-base sm:text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none">
                 </div>
 
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
                         <label for="create_kategori" class="mb-1.5 block text-sm font-medium text-[#26221E]">Kategori</label>
                         <select id="create_kategori" name="kategori" required
-                                class="min-h-10 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none">
+                                class="min-h-11 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-base sm:text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none">
                             @foreach ($categories as $category)
                                 <option value="{{ $category }}">{{ $category }}</option>
                             @endforeach
@@ -262,7 +337,7 @@
                     <div>
                         <label for="create_harga_jual" class="mb-1.5 block text-sm font-medium text-[#26221E]">Harga Jual (Rp)</label>
                         <input id="create_harga_jual" name="harga_jual" type="number" min="0" value="{{ old('harga_jual', 0) }}"
-                               class="min-h-10 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none">
+                               class="min-h-11 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-base sm:text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none">
                     </div>
                 </div>
 
@@ -270,18 +345,18 @@
                     <div>
                         <label for="create_stok" class="mb-1.5 block text-sm font-medium text-[#26221E]">Stok Awal</label>
                         <input id="create_stok" name="stok" type="number" step="any" min="0" required value="{{ old('stok', 0) }}"
-                               class="min-h-10 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none">
+                               class="min-h-11 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-base sm:text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none">
                     </div>
                     <div>
                         <label for="create_satuan" class="mb-1.5 block text-sm font-medium text-[#26221E]">Satuan</label>
                         <input id="create_satuan" name="satuan" type="text" required value="{{ old('satuan', 'pcs') }}"
                                placeholder="pcs / gelas / kg"
-                               class="min-h-10 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none">
+                               class="min-h-11 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-base sm:text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none">
                     </div>
                     <div>
                         <label for="create_stok_minimum" class="mb-1.5 block text-sm font-medium text-[#26221E]">Stok Minimum</label>
                         <input id="create_stok_minimum" name="stok_minimum" type="number" step="any" min="0" required value="{{ old('stok_minimum', 5) }}"
-                               class="min-h-10 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none">
+                               class="min-h-11 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-base sm:text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none">
                     </div>
                 </div>
 
@@ -300,13 +375,13 @@
                     <button
                         type="button"
                         onclick="document.getElementById('modal-tambah-barang').classList.add('hidden')"
-                        class="inline-flex h-10 items-center rounded-lg border border-[#E4DED6] bg-white px-4 text-sm font-semibold text-[#26221E] hover:bg-[#F1EEE8]"
+                        class="inline-flex min-h-11 flex-1 items-center justify-center rounded-lg border border-[#E4DED6] bg-white px-4 text-sm font-semibold text-[#26221E] hover:bg-[#F1EEE8] sm:flex-none"
                     >
                         Batal
                     </button>
                     <button
                         type="submit"
-                        class="inline-flex h-10 items-center rounded-lg bg-[#6F4E37] px-4 text-sm font-semibold text-white hover:bg-[#805B42]"
+                        class="inline-flex min-h-11 flex-1 items-center justify-center rounded-lg bg-[#6F4E37] px-4 text-sm font-semibold text-white hover:bg-[#805B42] sm:flex-none"
                     >
                         Simpan Barang
                     </button>

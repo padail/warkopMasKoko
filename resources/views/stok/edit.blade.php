@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="mx-auto max-w-4xl px-4 py-6 md:px-5 lg:px-6">
-    <div class="mb-6 flex items-center justify-between gap-4">
+<div class="mx-auto max-w-4xl px-4 py-4 pb-8 md:px-5 md:py-6 lg:px-6">
+    <div class="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
             <h1 class="text-2xl font-bold text-[#26221E]">Kelola Barang & Stok</h1>
             <p class="mt-1 text-sm text-[#70685F]">{{ $item->nama }} &middot; {{ $item->kategori }}</p>
@@ -11,7 +11,7 @@
     </div>
 
     {{-- Ringkasan Kondisi Stok Saat Ini (Read-Only) --}}
-    <div class="mb-6 rounded-xl border border-[#E4DED6] bg-white p-6">
+    <div class="mb-5 rounded-xl border border-[#E4DED6] bg-white p-4 sm:p-6">
         <h2 class="mb-4 text-lg font-semibold text-[#26221E]">Informasi Barang Saat Ini</h2>
         <dl class="grid grid-cols-2 gap-4 text-sm sm:grid-cols-4">
             <div>
@@ -43,7 +43,7 @@
     </div>
 
     {{-- Form Pembaruan Stok Cepat (Untuk Admin dan Karyawan) --}}
-    <div class="mb-6 rounded-xl border border-[#E4DED6] bg-white p-6">
+    <div class="mb-5 rounded-xl border border-[#E4DED6] bg-white p-4 sm:p-6">
         <h2 class="mb-1 text-lg font-semibold text-[#26221E]">Pembaruan Jumlah Stok</h2>
         <p class="mb-4 text-sm text-[#70685F]">
             Perubahan stok akan mencatat nama pengguna yang sedang login dan alasan pembaruan.
@@ -53,7 +53,7 @@
     </div>
 
     {{-- Form Edit Identitas & Harga --}}
-    <div class="rounded-xl border border-[#E4DED6] bg-white p-6">
+    <div class="rounded-xl border border-[#E4DED6] bg-white p-4 sm:p-6">
         <h2 class="mb-1 text-lg font-semibold text-[#26221E]">Edit Identitas & Harga Barang</h2>
         <p class="mb-4 text-sm text-[#70685F]">
             Perubahan harga jual hanya berlaku untuk transaksi berikutnya dan tidak mengubah riwayat transaksi lama.
@@ -67,13 +67,13 @@
                 <div>
                     <label for="nama" class="mb-1.5 block text-sm font-medium text-[#26221E]">Nama Barang</label>
                     <input id="nama" name="nama" type="text" required value="{{ old('nama', $item->nama) }}"
-                           class="min-h-10 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none">
+                           class="min-h-11 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-base sm:text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none">
                 </div>
 
                 <div>
                     <label for="kategori" class="mb-1.5 block text-sm font-medium text-[#26221E]">Kategori</label>
                     <select id="kategori" name="kategori" required
-                            class="min-h-10 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none">
+                            class="min-h-11 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-base sm:text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none">
                         @foreach ($categories as $category)
                             <option value="{{ $category }}" @selected(old('kategori', $item->kategori) === $category)>
                                 {{ $category }}
@@ -87,22 +87,22 @@
                 <div>
                     <label for="harga_jual" class="mb-1.5 block text-sm font-medium text-[#26221E]">Harga Jual (Rp)</label>
                     <input id="harga_jual" name="harga_jual" type="number" min="0" value="{{ old('harga_jual', $item->harga_jual) }}"
-                           class="min-h-10 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none">
+                           class="min-h-11 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-base sm:text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none">
                 </div>
                 <div>
                     <label for="stok" class="mb-1.5 block text-sm font-medium text-[#26221E]">Stok</label>
                     <input id="stok" name="stok" type="number" step="any" min="0" required value="{{ old('stok', (float) $item->stok) }}"
-                           class="min-h-10 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none">
+                           class="min-h-11 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-base sm:text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none">
                 </div>
                 <div>
                     <label for="satuan" class="mb-1.5 block text-sm font-medium text-[#26221E]">Satuan</label>
                     <input id="satuan" name="satuan" type="text" required value="{{ old('satuan', $item->satuan) }}"
-                           class="min-h-10 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none">
+                           class="min-h-11 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-base sm:text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none">
                 </div>
                 <div>
                     <label for="stok_minimum" class="mb-1.5 block text-sm font-medium text-[#26221E]">Stok Minimum</label>
                     <input id="stok_minimum" name="stok_minimum" type="number" step="any" min="0" required value="{{ old('stok_minimum', (float) $item->stok_minimum) }}"
-                           class="min-h-10 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none">
+                           class="min-h-11 w-full rounded-lg border border-[#E4DED6] bg-white px-3 text-base sm:text-sm text-[#26221E] focus:border-[#6F4E37] focus:outline-none">
                 </div>
             </div>
 
@@ -122,7 +122,7 @@
             <div class="flex justify-end pt-2">
                 <button
                     type="submit"
-                    class="inline-flex h-10 items-center rounded-lg bg-[#6F4E37] px-4 text-sm font-semibold text-white transition hover:bg-[#805B42]"
+                    class="inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-[#6F4E37] px-4 text-sm font-semibold text-white transition hover:bg-[#805B42] sm:w-auto"
                 >
                     Simpan Perubahan Barang
                 </button>
