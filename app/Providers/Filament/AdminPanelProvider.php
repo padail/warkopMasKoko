@@ -30,8 +30,10 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->brandName('Warkop Mas Koko')
             ->font('Inter')
+            ->darkMode(false)
             ->colors([
                 'primary' => Color::hex('#6F4E37'),
+                'gray' => Color::hex('#70685F'),
                 'success' => Color::hex('#237A57'),
                 'warning' => Color::hex('#A86412'),
                 'danger' => Color::hex('#B42318'),
