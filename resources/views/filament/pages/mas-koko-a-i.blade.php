@@ -267,7 +267,7 @@
             @endif
 
             <form wire:submit="sendMessage" class="border-t border-gray-200 p-4 dark:border-gray-800">
-                <div class="flex flex-col gap-3 sm:flex-row sm:items-end">
+                <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
                     <div class="min-w-0 flex-1">
                         <label for="question" class="sr-only">Pertanyaan untuk Mas Koko AI</label>
                         <textarea
@@ -276,14 +276,13 @@
                             rows="2"
                             maxlength="1000"
                             placeholder="Contoh: Apa yang perlu saya perhatikan dari penjualan dan stok minggu ini?"
-                            class="w-full resize-y rounded-xl border-gray-300 text-sm shadow-sm focus:border-primary-500 focus:ring-primary-500 dark:border-gray-700 dark:bg-gray-950 dark:text-white"
+                            class="w-full resize-y rounded-md border-gray-300 text-sm shadow-sm focus:border-primary-500 focus:ring-primary-500 dark:border-gray-700 dark:bg-gray-950 dark:text-white p-3"
                         ></textarea>
                         @error('question')
                             <p class="mt-1 text-xs text-danger-600">{{ $message }}</p>
                         @enderror
                         <p class="mt-1 text-xs text-gray-400">Maksimal 1.000 karakter · Maksimal 10 pertanyaan per menit</p>
                     </div>
-
                     <x-filament::button
                         type="submit"
                         icon="heroicon-o-paper-airplane"
@@ -293,6 +292,7 @@
                         <span wire:loading.remove wire:target="sendMessage">Kirim</span>
                         <span wire:loading wire:target="sendMessage">Memproses...</span>
                     </x-filament::button>
+
                 </div>
             </form>
         </section>
